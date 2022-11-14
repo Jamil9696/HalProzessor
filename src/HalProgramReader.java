@@ -28,8 +28,8 @@ public class HalProgramReader {
             System.out.println("Invalid file path!");
             return;
         }
-        halProgram = new File(filePath);
 
+        halProgram = new File(filePath);
         try (final BufferedReader buffRead = new BufferedReader(new FileReader(halProgram))) {
 
             String line;

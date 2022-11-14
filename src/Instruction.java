@@ -2,20 +2,19 @@ import java.util.Optional;
 
 public class Instruction {
 
-    private final String instructionName;
+    private final String instruction;
     private String parameter;
 
-    public Instruction(String instructionName) {
-        this.instructionName = instructionName;
-    }
+    public Instruction(String instruction, String instructionParam) {
 
-    public Instruction(String instructionName, String instructionParam) {
-        this.instructionName = instructionName;
+        this.instruction = instruction;
+
+        if(!instruction.equals(instructionParam))
         this.parameter = instructionParam;
     }
 
     public String getInstructionName() {
-        return instructionName;
+        return instruction;
     }
 
     public String getParameter() {
