@@ -6,9 +6,7 @@ public class Instruction {
     private String parameter;
 
     public Instruction(String instruction, String instructionParam) {
-
         this.instruction = instruction;
-
         if(!instruction.equals(instructionParam))
         this.parameter = instructionParam;
     }
