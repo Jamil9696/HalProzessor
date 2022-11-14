@@ -8,7 +8,6 @@ public class ProgramMemory {
 
 
     public void push(Instruction instruction){
-
         INSTRUCTION_LIST.add(instruction);
     }
 

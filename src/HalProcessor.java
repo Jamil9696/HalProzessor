@@ -11,7 +11,7 @@ public class HalProcessor {
     }
 
 
-    public void add(String instruction, String instructionParam) {
+    public void initProgramMemory(String instruction, String instructionParam) {
 
         if(instruction.equals(instructionParam)) {
             programMemory.push(new Instruction(instruction));
