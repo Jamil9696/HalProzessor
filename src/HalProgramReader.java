@@ -47,9 +47,9 @@ public class HalProgramReader {
     public void createInstruction(String[] instructionParams){
 
         if(instructionParams[0].chars().allMatch(Character::isDigit)){
-            halProzessor.add(instructionParams[1], instructionParams[instructionParams.length-1]);
+            halProzessor.initProgramMemory(instructionParams[1], instructionParams[instructionParams.length-1]);
         }else{
-            halProzessor.add(instructionParams[0], instructionParams[instructionParams.length-1]);
+            halProzessor.initProgramMemory(instructionParams[0], instructionParams[instructionParams.length-1]);
         }
 
     }

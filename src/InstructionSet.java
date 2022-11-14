@@ -20,5 +20,5 @@ public enum InstructionSet {
     MULNUM,
     DIVNUM,
     LOADIND,
-    STOREIND;
+    STOREIND
 }
