@@ -16,7 +16,7 @@ public class HalProgramReader {
 
 
     public HalProgramReader() {
-        instructionParams = new ArrayList<>();        
+        instructionParams = new ArrayList<>();
 
     }
 

@@ -3,7 +3,6 @@ public class Accumulator {
 
     private Float value;
 
-
     public void setValue(Float value){
         this.value = value;
     }
@@ -11,7 +10,6 @@ public class Accumulator {
     public Float getValue() {
         return value;
     }
-
 
     public void add (Float value2){
         value += value2;
