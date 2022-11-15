@@ -21,7 +21,7 @@ public class HalProgramReader {
     }
 
 
-    public void read_file(String filePath){
+    public void read_file(String filePath) throws IOException {
 
         if(!Files.exists(Path.of(filePath))){       //check if file is valid
             System.out.println("Invalid file path!");
@@ -29,16 +29,12 @@ public class HalProgramReader {
         }
 
         File halProgram = new File(filePath);
-        try (final BufferedReader buffRead = new BufferedReader(new FileReader(halProgram))) 
-        {
+        try (final BufferedReader buffRead = new BufferedReader(new FileReader(halProgram))) {
             String line;
             while ((line = buffRead.readLine()) != null && !Objects.equals(line, "")) {
                 String[] argv = line.split(" ");
                 convertToInstruction(argv);
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }

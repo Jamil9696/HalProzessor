@@ -14,8 +14,9 @@ public class HalProcessor {
     public void initProgramMemory(List<String[]> params){
         params.forEach(param -> initProgramMemory(param[0], param[1]));
     }
-    public void initProgramMemory(String instruction, String instructionParam) {
-        programMemory.push(new Instruction(instruction, instructionParam));
+
+    public void initProgramMemory(String instruction, String instructionParam) throws IllegalArgumentException{
+        programMemory.push(new Instruction(InstructionSet.valueOf(instruction), instructionParam));
     }
 
     public void printMemory(){

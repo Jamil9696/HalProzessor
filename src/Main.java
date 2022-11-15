@@ -1,41 +1,45 @@
+import java.io.IOException;
 
 public class Main {
 
 
     public static void main(String[] args) {
 
-        // How to compile javac [ options ] [ sourcefiles ] [ classes ] [ @argfiles ]
-        // javac Main.java -d ../executable
-        HalProcessor processor = new HalProcessor(new ProgramMemory(), new Accumulator());
+
+           try {
+               // How to compile javac [ options ] [ sourcefiles ] [ classes ] [ @argfiles ]
+               // javac Main.java -d ../executable
+               HalProcessor processor = new HalProcessor(new ProgramMemory(), new Accumulator());
 
 
-        // if arguments contains HAL Programm
-        if(args.length > 0 && args[0].contains(".txt")) {
+               // if arguments contains HAL Programm
+               if (args.length > 0 && args[0].contains(".txt")) {
 
-            // read program
-            HalProgramReader halProgramReader = new HalProgramReader();
-            halProgramReader.read_file(args[args.length - 1]);
+                   // read program
+                   HalProgramReader halProgramReader = new HalProgramReader();
+                   halProgramReader.read_file(args[args.length - 1]);
 
-            // init program memory
-            processor.initProgramMemory(halProgramReader.getInstructionParams());
-            processor.printMemory();
-            // execute Instructions
+                   // init program memory
+                   processor.initProgramMemory(halProgramReader.getInstructionParams());
+                   processor.printMemory();
+                   // execute Instructions
 
-            // exit program
-            System.exit(0);
+                   // exit program
+                   System.exit(0);
+               }
+
+               // if arguments are simply one line HAL Instructions
+
+
+               while (true) {
+                   // execute Instruction
+
+                   // exit program
+                   System.exit(0);
+
+               }
+           }catch (Exception e){
+            e.printStackTrace();
+            }
         }
-
-        // if arguments are simply one line HAL Instructions
-
-
-        while(true) {
-
-
-            // execute Instruction
-
-            // exit program
-            System.exit(0);
-
-        }
-    }
 }

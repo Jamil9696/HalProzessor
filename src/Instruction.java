@@ -2,17 +2,17 @@ import java.util.Optional;
 
 public class Instruction {
 
-    private final String instruction;
+    private final InstructionSet instruction;
     private String parameter= "";
 
-    public Instruction(String instruction, String instructionParam) {
+    public Instruction(InstructionSet instruction, String instructionParam) {
         this.instruction = instruction;
         if(!instruction.equals(instructionParam)) //if equal -> no params given
             this.parameter = instructionParam;    //if not -> set params
     }
 
     public String getInstructionName() {
-        return instruction;
+        return instruction.toString();
     }
 
     public String getParameter() {
