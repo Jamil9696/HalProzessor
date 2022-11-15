@@ -3,23 +3,23 @@ import java.util.List;
 
 public class ProgramMemory {
 
-    private static final List<Instruction> INSTRUCTION_LIST = new ArrayList<>();
+    private final List<Instruction> instructionList = new ArrayList<>();
     int programCounter = 0;
 
     public void push(Instruction instruction){
-        INSTRUCTION_LIST.add(instruction);
+        instructionList.add(instruction);
     }
     public void pop(){
-        if(!INSTRUCTION_LIST.isEmpty()){
-            INSTRUCTION_LIST.remove(INSTRUCTION_LIST.size() -1);
+        if(!instructionList.isEmpty()){
+            instructionList.remove(instructionList.size() -1);
         }
 
     }
 
     public void printMemory(){
-        INSTRUCTION_LIST.forEach(
-                instruction -> System.out.println(instruction.getInstructionName() + " " + instruction.getParameter() )
-        );
+        instructionList.forEach(
+            instruction -> System.out.println(instruction.getInstructionName() 
+                                            + " " + instruction.getParameter() ));
     }
 
 

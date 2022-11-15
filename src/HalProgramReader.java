@@ -16,21 +16,21 @@ public class HalProgramReader {
 
 
     public HalProgramReader() {
-        instructionParams = new ArrayList<>();
+        instructionParams = new ArrayList<>();        
 
     }
 
 
     public void read_file(String filePath){
 
-        if(!Files.exists(Path.of(filePath))){
+        if(!Files.exists(Path.of(filePath))){       //check if file is valid
             System.out.println("Invalid file path!");
             return;
         }
 
         File halProgram = new File(filePath);
-        try (final BufferedReader buffRead = new BufferedReader(new FileReader(halProgram))) {
-
+        try (final BufferedReader buffRead = new BufferedReader(new FileReader(halProgram))) 
+        {
             String line;
             while ((line = buffRead.readLine()) != null && !Objects.equals(line, "")) {
                 String[] argv = line.split(" ");

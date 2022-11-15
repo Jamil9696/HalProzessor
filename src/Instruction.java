@@ -3,12 +3,12 @@ import java.util.Optional;
 public class Instruction {
 
     private final String instruction;
-    private String parameter;
+    private String parameter= "";
 
     public Instruction(String instruction, String instructionParam) {
         this.instruction = instruction;
-        if(!instruction.equals(instructionParam))
-        this.parameter = instructionParam;
+        if(!instruction.equals(instructionParam)) //if equal -> no params given
+            this.parameter = instructionParam;    //if not -> set params
     }
 
     public String getInstructionName() {
@@ -16,6 +16,6 @@ public class Instruction {
     }
 
     public String getParameter() {
-        return Optional.ofNullable(parameter).orElse("");
+        return parameter;
     }
 }
