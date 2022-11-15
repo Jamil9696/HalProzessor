@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class HalProcessor {
 
 
@@ -9,7 +11,15 @@ public class HalProcessor {
         this.accumulator = accumulator;
     }
 
+    public void initProgramMemory(List<String[]> params){
+        params.forEach(param -> initProgramMemory(param[0], param[1]));
+    }
     public void initProgramMemory(String instruction, String instructionParam) {
         programMemory.push(new Instruction(instruction, instructionParam));
     }
+
+    public void printMemory(){
+        programMemory.printMemory();
+    }
+
 }

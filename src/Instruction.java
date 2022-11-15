@@ -16,6 +16,6 @@ public class Instruction {
     }
 
     public String getParameter() {
-        return Optional.of(parameter).orElse("");
+        return Optional.ofNullable(parameter).orElse("");
     }
 }

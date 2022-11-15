@@ -12,10 +12,13 @@ public class Main {
         // if arguments contains HAL Programm
         if(args.length > 0 && args[0].contains(".txt")) {
 
-            // read program and initialize program memory
-            HalProgramReader halProgramReader = new HalProgramReader(processor);
+            // read program
+            HalProgramReader halProgramReader = new HalProgramReader();
             halProgramReader.read_file(args[args.length - 1]);
 
+            // init program memory
+            processor.initProgramMemory(halProgramReader.getInstructionParams());
+            processor.printMemory();
             // execute Instructions
 
             // exit program
@@ -23,14 +26,16 @@ public class Main {
         }
 
         // if arguments are simply one line HAL Instructions
-        if(args.length > 0){
+
+
+        while(true) {
+
+
             // execute Instruction
 
             // exit program
             System.exit(0);
+
         }
-
-
-        System.exit(1);
     }
 }

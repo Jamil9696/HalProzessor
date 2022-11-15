@@ -13,6 +13,13 @@ public class ProgramMemory {
         if(!INSTRUCTION_LIST.isEmpty()){
             INSTRUCTION_LIST.remove(INSTRUCTION_LIST.size() -1);
         }
+
+    }
+
+    public void printMemory(){
+        INSTRUCTION_LIST.forEach(
+                instruction -> System.out.println(instruction.getInstructionName() + " " + instruction.getParameter() )
+        );
     }
 
 

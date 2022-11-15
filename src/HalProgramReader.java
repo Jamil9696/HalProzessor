@@ -4,20 +4,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
 public class HalProgramReader {
 
-    private File halProgram;
-    private final HalProcessor halProzessor;
+    private final List<String[]> instructionParams;
 
 
-    public HalProgramReader(HalProcessor halProzessor) {
 
-        this.halProzessor = halProzessor;
-
-
+    public HalProgramReader() {
+        instructionParams = new ArrayList<>();
 
     }
 
@@ -29,13 +28,13 @@ public class HalProgramReader {
             return;
         }
 
-        halProgram = new File(filePath);
+        File halProgram = new File(filePath);
         try (final BufferedReader buffRead = new BufferedReader(new FileReader(halProgram))) {
 
             String line;
             while ((line = buffRead.readLine()) != null && !Objects.equals(line, "")) {
-                String[] instructionParams = line.split(" ");
-                createInstruction(instructionParams);
+                String[] argv = line.split(" ");
+                convertToInstruction(argv);
             }
 
         } catch (IOException e) {
@@ -44,14 +43,17 @@ public class HalProgramReader {
 
     }
 
-    public void createInstruction(String[] instructionParams){
+    private void convertToInstruction(String[] args){
 
-        if(instructionParams[0].chars().allMatch(Character::isDigit)){
-            halProzessor.initProgramMemory(instructionParams[1], instructionParams[instructionParams.length-1]);
+        if(args[0].chars().allMatch(Character::isDigit)){
+            instructionParams.add(new String[]{args[1], args[args.length-1]});
         }else{
-            halProzessor.initProgramMemory(instructionParams[0], instructionParams[instructionParams.length-1]);
+            instructionParams.add(new String[]{args[0], args[args.length-1]});
         }
+    }
 
+    public List<String[]> getInstructionParams(){
+        return instructionParams;
     }
 
 
