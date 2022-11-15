@@ -16,9 +16,13 @@ public class ProgramMemory {
         }
     }
 
+    public Instruction getCurrentInstruction(int index){
+        return instructionList.get(index);
+    }
+
     public void printMemory(){
         instructionList.forEach(instruction ->
-                System.out.println(instruction.getInstructionName() + " " + instruction.getParameter() )
+                System.out.println(instruction.getInstructionTyp().toString() + " " + instruction.getParameter() )
         );
     }
 

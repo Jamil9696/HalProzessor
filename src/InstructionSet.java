@@ -7,10 +7,6 @@ public enum InstructionSet {
     LOAD,
     LOADNUM,
     STORE,
-    JUMPNEG,
-    JUMPPOS,
-    JUMPNULL,
-    JUMP,
     ADD,
     ADDNUM,
     SUB,
@@ -20,5 +16,9 @@ public enum InstructionSet {
     MULNUM,
     DIVNUM,
     LOADIND,
-    STOREIND
+    STOREIND,
+    JUMPNEG,
+    JUMPPOS,
+    JUMPNULL,
+    JUMP,
 }

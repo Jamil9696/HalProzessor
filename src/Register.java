@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 
 public class Register {
 
@@ -24,11 +22,15 @@ public class Register {
 
     }
 
-    public void setValue(int index, Float value) throws IllegalArgumentException {
+    public void setValue(int index, Float value)  {
 
         if(index >= SIZE) {
-            throw new IllegalArgumentException("Index is too big");
+            throw new IllegalArgumentException("Index is out of bounds");
         }
         registers[index] = value;
+    }
+
+    public void setValue(Float index, Float value) {
+        setValue(index.intValue(), value);
     }
 }

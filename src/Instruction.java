@@ -11,11 +11,11 @@ public class Instruction {
             this.parameter = instructionParam;    //if not -> set params
     }
 
-    public String getInstructionName() {
-        return instruction.toString();
+    public InstructionSet getInstructionTyp() {
+        return instruction;
     }
 
-    public String getParameter() {
-        return parameter;
+    public Float getParameter() {
+        return Float.valueOf(parameter);
     }
 }

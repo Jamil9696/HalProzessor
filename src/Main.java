@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class Main {
 
 
@@ -9,7 +7,7 @@ public class Main {
            try {
                // How to compile javac [ options ] [ sourcefiles ] [ classes ] [ @argfiles ]
                // javac Main.java -d ../executable
-               HalProcessor processor = new HalProcessor(new ProgramMemory(), new Accumulator());
+               HalProcessor processor = new HalProcessor(new ProgramMemory(), new Accumulator(), new Register());
 
 
                // if arguments contains HAL Programm
@@ -24,8 +22,6 @@ public class Main {
                    processor.printMemory();
                    // execute Instructions
 
-                   // exit program
-                   System.exit(0);
                }
 
                // if arguments are simply one line HAL Instructions
@@ -36,7 +32,6 @@ public class Main {
 
                    // exit program
                    System.exit(0);
-
                }
            }catch (Exception e){
             e.printStackTrace();
