@@ -7,7 +7,7 @@ public class Instruction {
 
     public Instruction(InstructionSet instruction, String instructionParam) {
         this.instruction = instruction;
-        if(!instruction.equals(instructionParam)) //if equal -> no params given
+        if(!instruction.toString().equals(instructionParam)) //if equal -> no params given
             this.parameter = instructionParam;    //if not -> set params
     }
 
