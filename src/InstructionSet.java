@@ -20,5 +20,9 @@ public enum InstructionSet {
     JUMPNEG,
     JUMPPOS,
     JUMPNULL,
-    JUMP,
+    JUMP;
+
+    public String getType(){
+        return this.toString();
+    }
 }

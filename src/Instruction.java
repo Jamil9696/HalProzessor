@@ -1,4 +1,3 @@
-import java.util.Optional;
 
 public class Instruction {
 
@@ -15,7 +14,8 @@ public class Instruction {
         return instruction;
     }
 
-    public Float getParameter() {
-        return Float.valueOf(parameter);
+    public String getParameter() {
+
+        return parameter;
     }
 }
