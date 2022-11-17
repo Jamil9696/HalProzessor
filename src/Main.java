@@ -8,7 +8,9 @@ public class Main {
                // How to compile javac [ options ] [ sourcefiles ] [ classes ] [ @argfiles ]
                // javac Main.java -d ../executable
                HalProcessor processor = new HalProcessor( new Accumulator(), new Register());
-               TimingControl timingControl = new TimingControl(new ProgramMemory(), processor);
+               InputInterface input = new InputInterface();
+               OutputInterface output = new OutputInterface();
+               HalArchitecture halArchitecture = new HalArchitecture(new ProgramMemory(), processor, new InputInterface(), new OutputInterface());
 
                // if arguments contains HAL Programm
                if (args.length > 0 && args[0].contains(".txt")) {
@@ -18,8 +20,8 @@ public class Main {
                    halProgramReader.read_file(args[args.length - 1]);
 
                    // init program memory
-                   timingControl.initProgramMemory(halProgramReader.getInstructionParams());
-                   timingControl.printMemory();
+                   halArchitecture.initProgramMemory(halProgramReader.getInstructionParams());
+                   halArchitecture.printMemory();
                    // execute Instructions
 
                }

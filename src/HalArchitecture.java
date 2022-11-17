@@ -1,14 +1,19 @@
 import java.util.List;
 
-public class TimingControl {
+public class HalArchitecture {
 
     private final ProgramMemory programMemory;
     private final HalProcessor halProcessor;
+    private final InputInterface inputInterface;
+    private final OutputInterface outputInterface;
     private int programCounter = 0;
+    private boolean isStarted = false;
 
-    public TimingControl(ProgramMemory programMemory, HalProcessor halProcessor) {
+    public HalArchitecture(ProgramMemory programMemory, HalProcessor halProcessor, InputInterface inputInterface, OutputInterface outputInterface) {
         this.programMemory = programMemory;
         this.halProcessor = halProcessor;
+        this.inputInterface = inputInterface;
+        this.outputInterface = outputInterface;
     }
 
 
@@ -20,15 +25,16 @@ public class TimingControl {
 
     public void decode(Instruction instruction) {
 
+        //  don't use enhanced switch (won't compile)
         switch (instruction.getInstructionTyp()) {
             case START:
-                System.out.println("Hello");
+                isStarted = true;
                 break;
             case STOP:
                 System.exit(1);
                 break;
             case IN:
-                System.out.println("Hello");
+                halProcessor.in(inputInterface.read());
                 break;
             case OUT:
                 System.out.println("Hello");

@@ -1,5 +1,4 @@
 
-import java.util.List;
 
 public class HalProcessor {
 
@@ -31,6 +30,13 @@ public class HalProcessor {
     }
 
 
+    public void in(Float parameter) {
+        // TODO: implement functionality
+    }
+
+    public Float out() {
+       return 0.0f; // TODO: implement functionality
+    }
 
 
 }

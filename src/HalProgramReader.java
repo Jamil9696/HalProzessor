@@ -13,8 +13,6 @@ public class HalProgramReader {
 
     private final List<String[]> instructionParams;
 
-
-
     public HalProgramReader() {
         instructionParams = new ArrayList<>();
 
