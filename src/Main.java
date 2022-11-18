@@ -8,9 +8,12 @@ public class Main {
                // How to compile javac [ options ] [ sourcefiles ] [ classes ] [ @argfiles ]
                // javac Main.java -d ../executable
                HalProcessor processor = new HalProcessor( new Accumulator(), new Register());
-               InputInterface input = new InputInterface();
-               OutputInterface output = new OutputInterface();
-               HalArchitecture halArchitecture = new HalArchitecture(new ProgramMemory(), processor, new InputInterface(), new OutputInterface());
+               HalArchitecture halArchitecture = new HalArchitecture(
+                       new ProgramMemory(),
+                       processor,
+                       new InputInterface(),
+                       new OutputInterface()
+               );
 
                // if arguments contains HAL Programm
                if (args.length > 0 && args[0].contains(".txt")) {
