@@ -1,13 +1,13 @@
 public class Accumulator {
 
 
-    private Float value;
+    private Float value = 0f;
 
-    public void setValue(Float value){
+    public void overwrite(Float value){
         this.value = value;
     }
 
-    public Float getValue() {
+    public Float getCurrentValue() {
         return value;
     }
 

@@ -1,11 +1,11 @@
 
-public class Register {
+public class DataStorage {
 
 
     private final Float[] registers;
     private final int SIZE = 15;
 
-    public Register() {
+    public DataStorage() {
         this.registers = new Float[SIZE];
     }
 

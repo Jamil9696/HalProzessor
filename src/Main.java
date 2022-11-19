@@ -5,9 +5,9 @@ public class Main {
 
 
            try {
-               // How to compile javac [ options ] [ sourcefiles ] [ classes ] [ @argfiles ]
+
                // javac Main.java -d ../executable
-               HalProcessor processor = new HalProcessor( new Accumulator(), new Register());
+               HalProcessor processor = new HalProcessor( new Accumulator(), new DataStorage());
                HalArchitecture halArchitecture = new HalArchitecture(
                        new ProgramMemory(),
                        processor,
@@ -24,8 +24,11 @@ public class Main {
 
                    // init program memory
                    halArchitecture.initProgramMemory(halProgramReader.getInstructionParams());
+                   System.out.println("============ Current program ==============");
                    halArchitecture.printMemory();
+                   System.out.println("=========================================");
                    // execute Instructions
+                   while(halArchitecture.fetch());
 
                }
 

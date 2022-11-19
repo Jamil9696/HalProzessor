@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Optional;
 
 public class HalArchitecture {
 
@@ -9,7 +10,12 @@ public class HalArchitecture {
     private int programCounter = 0;
     private boolean isStarted = false;
 
-    public HalArchitecture(ProgramMemory programMemory, HalProcessor halProcessor, InputInterface inputInterface, OutputInterface outputInterface) {
+
+    public HalArchitecture(
+            ProgramMemory programMemory,
+            HalProcessor halProcessor,
+            InputInterface inputInterface,
+            OutputInterface outputInterface) {
         this.programMemory = programMemory;
         this.halProcessor = halProcessor;
         this.inputInterface = inputInterface;
@@ -17,10 +23,16 @@ public class HalArchitecture {
     }
 
 
-    public void fetch() {
-        Instruction instruction = programMemory.getCurrentInstruction(programCounter);
-        decode(instruction);
+    public boolean fetch() {
+        Optional<Instruction> instruction = programMemory.getCurrentInstruction(programCounter);
+
+        if(instruction.isEmpty()){
+            return false;
+        }
+
+        decode(instruction.get());
         programCounter++;
+        return true;
     }
 
     public void decode(Instruction instruction) {
@@ -28,7 +40,7 @@ public class HalArchitecture {
         //  don't use enhanced switch (won't compile)
         switch (instruction.getInstructionTyp()) {
             case START:
-                isStarted = true;
+                isStarted = true; // purpose
                 break;
             case STOP:
                 System.exit(1);
@@ -37,7 +49,7 @@ public class HalArchitecture {
                 halProcessor.in(inputInterface.read());
                 break;
             case OUT:
-                System.out.println("Hello");
+                outputInterface.print(halProcessor.out());
                 break;
             case LOAD:
                 System.out.println("Hello");
@@ -49,10 +61,10 @@ public class HalArchitecture {
                 System.out.println("Hello");
                 break;
             case STORE:
-                System.out.println("Hello");
+                programMemory.store(halProcessor.out(), Float.valueOf(instruction.getParameter()));
                 break;
             case STOREIND:
-                System.out.println("Hello");
+                programMemory.store(halProcessor.out(), Integer.valueOf(instruction.getParameter()));
                 break;
             case ADD:
                 halProcessor.add(Float.valueOf(instruction.getParameter()));
