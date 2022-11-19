@@ -31,7 +31,9 @@ public class HalArchitecture {
         }
 
         decode(optional.get());
+
         programCounter++;
+        System.out.println("Current PC: " + programCounter);
         return true;
     }
 
@@ -91,16 +93,16 @@ public class HalArchitecture {
                 halProcessor.mul(Float.valueOf(instruction.registerNumber()));// constant
                 break;
             case JUMP:
-
+                programCounter = halProcessor.jump(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
                 break;
             case JUMPNULL:
-                System.out.println("Hello");
+                programCounter = halProcessor.jumpnull(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
                 break;
             case JUMPNEG:
-                System.out.println("Hello");
+                programCounter = halProcessor.jumpneg(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
                 break;
             case JUMPPOS:
-                System.out.println("Hello");
+                programCounter = halProcessor.jumppos(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
                 break;
             default:
                 System.out.println("Invalid instruction");

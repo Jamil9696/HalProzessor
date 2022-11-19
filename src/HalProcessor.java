@@ -32,4 +32,31 @@ public class HalProcessor {
 
     public Float out(){return accumulator.getCurrentValue();}
 
+    public int jump(int parseInt, int size) {
+        if(parseInt >= 0 && parseInt < size){
+            return parseInt-1;
+        }
+        throw new IllegalArgumentException("Jump index is out of bounds");
+    }
+
+    public int jumpnull(int parseInt, int programSize) {
+        if (accumulator.equalZero()){
+            return jump(parseInt,programSize);
+        }
+        return parseInt;
+    }
+
+    public int jumpneg(int parseInt, int programSize) {
+        if (accumulator.neg()){
+            return jump(parseInt,programSize);
+        }
+        return parseInt;
+    }
+
+    public int jumppos(int parseInt, int programSize) {
+        if (accumulator.pos()){
+            return jump(parseInt,programSize);
+        }
+        return parseInt;
+    }
 }

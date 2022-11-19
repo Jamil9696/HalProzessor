@@ -46,4 +46,8 @@ public class ProgramMemory {
     public Float load(Float index) {
         return load(index.intValue());
     }
+
+  public int getProgramSize() {
+        return instructionList.size();
+  }
 }

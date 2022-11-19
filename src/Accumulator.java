@@ -26,6 +26,15 @@ public class Accumulator {
     public void mul (Float value2){
         value *= value2;
     }
+    public boolean equalZero() {
+        return value == 0;
+    }
 
+    public boolean neg() {
+        return value < 0;
+    }
 
+    public boolean pos() {
+        return value > 0;
+    }
 }
