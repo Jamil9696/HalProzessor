@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ProgramMemory {
@@ -30,7 +29,7 @@ public class ProgramMemory {
 
     public void printMemory(){
         instructionList.forEach(instruction ->
-                System.out.println(instruction.getInstructionTyp().toString() + " " + instruction.getParameter() )
+                System.out.println(instruction.getInstructionTyp().toString() + " " + instruction.registerNumber() )
         );
     }
 
@@ -39,5 +38,12 @@ public class ProgramMemory {
     }
     public void store(Float data, Integer index) {
         dataStorage.setValue(index,data);
+    }
+
+    public Float load(Integer index){
+        return dataStorage.getValue(index);
+    }
+    public Float load(Float index) {
+        return load(index.intValue());
     }
 }

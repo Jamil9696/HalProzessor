@@ -14,7 +14,7 @@ public class Instruction {
         return instruction;
     }
 
-    public String getParameter() {
+    public String registerNumber() {
         return parameter;
     }
 }

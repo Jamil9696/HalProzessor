@@ -24,13 +24,13 @@ public class HalArchitecture {
 
 
     public boolean fetch() {
-        Optional<Instruction> instruction = programMemory.getCurrentInstruction(programCounter);
+        Optional<Instruction> optional = programMemory.getCurrentInstruction(programCounter);
 
-        if(instruction.isEmpty()){
+        if(optional.isEmpty()){
             return false;
         }
 
-        decode(instruction.get());
+        decode(optional.get());
         programCounter++;
         return true;
     }
@@ -52,7 +52,7 @@ public class HalArchitecture {
                 outputInterface.print(halProcessor.out());
                 break;
             case LOAD:
-                System.out.println("Hello");
+                halProcessor.in(programMemory.load(Float.valueOf(instruction.registerNumber())));
                 break;
             case LOADIND:
                 System.out.println("Hello");
@@ -61,31 +61,31 @@ public class HalArchitecture {
                 System.out.println("Hello");
                 break;
             case STORE:
-                programMemory.store(halProcessor.out(), Float.valueOf(instruction.getParameter()));
+                programMemory.store(halProcessor.out(), Float.valueOf(instruction.registerNumber()));
                 break;
             case STOREIND:
-                programMemory.store(halProcessor.out(), Integer.valueOf(instruction.getParameter()));
+                programMemory.store(halProcessor.out(), Integer.valueOf(instruction.registerNumber()));
                 break;
             case ADD:
-                halProcessor.add(Float.valueOf(instruction.getParameter()));
+                halProcessor.add(programMemory.load(Float.valueOf(instruction.registerNumber())));
                 break;
             case ADDNUM:
-                System.out.println("Hello");
+                halProcessor.add(Float.valueOf(instruction.registerNumber()));// constant
                 break;
             case SUB:
-                halProcessor.sub(Float.valueOf(instruction.getParameter()));
+                halProcessor.sub(programMemory.load(Float.valueOf(instruction.registerNumber())));
                 break;
             case SUBNUM:
                 System.out.println("Hello");
                 break;
             case DIV:
-                halProcessor.div(Float.valueOf(instruction.getParameter()));
+                halProcessor.div(programMemory.load(Float.valueOf(instruction.registerNumber())));
                 break;
             case DIVNUM:
                 System.out.println("Hello");
                 break;
             case MUL:
-                halProcessor.mul(Float.valueOf(instruction.getParameter()));
+                halProcessor.mul(programMemory.load(Float.valueOf(instruction.registerNumber())));
                 break;
             case MULNUM:
                 System.out.println("Hello");
