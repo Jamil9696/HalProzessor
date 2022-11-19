@@ -7,9 +7,9 @@ public class Main {
            try {
 
                // javac Main.java -d ../executable
-               HalProcessor processor = new HalProcessor( new Accumulator(), new DataStorage());
+               HalProcessor processor = new HalProcessor( new Accumulator());
                HalArchitecture halArchitecture = new HalArchitecture(
-                       new ProgramMemory(),
+                       new ProgramMemory(new DataStorage(15)),
                        processor,
                        new InputInterface(),
                        new OutputInterface()
@@ -28,19 +28,10 @@ public class Main {
                    halArchitecture.printMemory();
                    System.out.println("=========================================");
                    // execute Instructions
-                   while(halArchitecture.fetch());
+                  while(halArchitecture.fetch());
 
                }
 
-               // if arguments are simply one line HAL Instructions
-
-
-               while (true) {
-                   // execute Instruction
-
-                   // exit program
-                   System.exit(0);
-               }
            }catch (Exception e){
             e.printStackTrace();
             }

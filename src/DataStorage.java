@@ -3,15 +3,15 @@ public class DataStorage {
 
 
     private final Float[] registers;
-    private final int SIZE = 15;
 
-    public DataStorage() {
-        this.registers = new Float[SIZE];
+    public DataStorage(int size) {
+
+        this.registers = new Float[size];
     }
 
     public Float getValue(int index) throws IllegalArgumentException{
 
-        if(index >= SIZE) {
+        if(index >= registers.length) {
             throw new IllegalArgumentException("Index is too big");
         }
         return registers[index];
@@ -19,12 +19,11 @@ public class DataStorage {
 
     public Float getValue(Float index){
        return getValue(index.intValue());
-
     }
 
     public void setValue(int index, Float value)  {
 
-        if(index >= SIZE) {
+        if(index >= registers.length) {
             throw new IllegalArgumentException("Index is out of bounds");
         }
         registers[index] = value;

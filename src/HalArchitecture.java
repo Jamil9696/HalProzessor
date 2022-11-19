@@ -43,7 +43,7 @@ public class HalArchitecture {
                 isStarted = true; // purpose
                 break;
             case STOP:
-                System.exit(1);
+                System.exit(0);
                 break;
             case IN:
                 halProcessor.in(inputInterface.read());

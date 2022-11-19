@@ -10,8 +10,8 @@ public class ProgramMemory {
 
     int programCounter = 0;
 
-    public ProgramMemory() {
-        this.dataStorage = new DataStorage();
+    public ProgramMemory(DataStorage dataStorage) {
+        this.dataStorage = dataStorage;
     }
 
     public void push(Instruction instruction){

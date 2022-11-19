@@ -4,13 +4,10 @@ public class HalProcessor {
 
 
     private final Accumulator accumulator;
-    private final DataStorage register;
-    private int programCounter = 0;
 
-    public HalProcessor( Accumulator accumulator, DataStorage register) {
 
+    public HalProcessor( Accumulator accumulator) {
         this.accumulator = accumulator;
-        this.register = register;
     }
 
     public void add(Float value) {
