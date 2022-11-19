@@ -55,10 +55,10 @@ public class HalArchitecture {
                 halProcessor.in(programMemory.load(Float.valueOf(instruction.registerNumber())));
                 break;
             case LOADIND:
-                System.out.println("Hello");
+                halProcessor.in(Integer.valueOf(instruction.registerNumber()));//
                 break;
             case LOADNUM:
-                System.out.println("Hello");
+                halProcessor.in(Float.valueOf(instruction.registerNumber()));//
                 break;
             case STORE:
                 programMemory.store(halProcessor.out(), Float.valueOf(instruction.registerNumber()));
@@ -76,22 +76,22 @@ public class HalArchitecture {
                 halProcessor.sub(programMemory.load(Float.valueOf(instruction.registerNumber())));
                 break;
             case SUBNUM:
-                System.out.println("Hello");
+                halProcessor.sub(Float.valueOf(instruction.registerNumber()));// constant
                 break;
             case DIV:
                 halProcessor.div(programMemory.load(Float.valueOf(instruction.registerNumber())));
                 break;
             case DIVNUM:
-                System.out.println("Hello");
+                halProcessor.div(Float.valueOf(instruction.registerNumber()));// constant
                 break;
             case MUL:
                 halProcessor.mul(programMemory.load(Float.valueOf(instruction.registerNumber())));
                 break;
             case MULNUM:
-                System.out.println("Hello");
+                halProcessor.mul(Float.valueOf(instruction.registerNumber()));// constant
                 break;
             case JUMP:
-                System.out.println("Hello");
+
                 break;
             case JUMPNULL:
                 System.out.println("Hello");

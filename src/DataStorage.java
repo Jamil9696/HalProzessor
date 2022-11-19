@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class DataStorage {
 
@@ -7,6 +8,10 @@ public class DataStorage {
     public DataStorage(int size) {
 
         this.registers = new Float[size];
+
+       for(int i = 0; i < size; i++){
+           registers[i] = 0f;
+       }
     }
 
     public Float getValue(int index) throws IllegalArgumentException{
