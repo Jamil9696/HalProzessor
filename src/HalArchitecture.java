@@ -7,7 +7,6 @@ public class HalArchitecture {
     private final HalProcessor halProcessor;
     private final InputInterface inputInterface;
     private final OutputInterface outputInterface;
-    private int programCounter = 0;
     private boolean isStarted = false;
 
 
@@ -24,7 +23,7 @@ public class HalArchitecture {
 
 
     public boolean fetch() {
-        Optional<Instruction> optional = programMemory.getCurrentInstruction(programCounter);
+        Optional<Instruction> optional = programMemory.getCurrentInstruction(halProcessor.getProgrammeCounter());
 
         if(optional.isEmpty()){
             return false;
@@ -32,8 +31,8 @@ public class HalArchitecture {
 
         decode(optional.get());
 
-        programCounter++;
-        System.out.println("Current PC: " + programCounter);
+        halProcessor.incrementPC();
+        //System.out.println("Current PC: " + halProcessor.getProgrammeCounter());
         return true;
     }
 
@@ -93,16 +92,16 @@ public class HalArchitecture {
                 halProcessor.mul(Float.valueOf(instruction.registerNumber()));// constant
                 break;
             case JUMP:
-                programCounter = halProcessor.jump(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
+                 halProcessor.jump(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
                 break;
             case JUMPNULL:
-                programCounter = halProcessor.jumpnull(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
+                 halProcessor.jumpnull(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
                 break;
             case JUMPNEG:
-                programCounter = halProcessor.jumpneg(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
+                 halProcessor.jumpneg(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
                 break;
             case JUMPPOS:
-                programCounter = halProcessor.jumppos(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
+                 halProcessor.jumppos(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
                 break;
             default:
                 System.out.println("Invalid instruction");

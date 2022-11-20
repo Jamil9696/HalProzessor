@@ -1,7 +1,10 @@
+
+
 public class Accumulator {
 
 
     private Float value = 0f;
+
 
     public void overwrite(Float value){
         this.value = value;

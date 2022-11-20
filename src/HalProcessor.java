@@ -4,7 +4,15 @@ public class HalProcessor {
 
 
     private final Accumulator accumulator;
+    private int programmeCounter = 0;
 
+    public int getProgrammeCounter(){
+        return programmeCounter;
+    }
+
+    public void incrementPC(){
+        programmeCounter++;
+    }
 
     public HalProcessor( Accumulator accumulator) {
         this.accumulator = accumulator;
@@ -32,31 +40,29 @@ public class HalProcessor {
 
     public Float out(){return accumulator.getCurrentValue();}
 
-    public int jump(int parseInt, int size) {
-        if(parseInt >= 0 && parseInt < size){
-            return parseInt-1;
+    public void jump(int jumpValue, int size) {
+        if(jumpValue >= 0 && jumpValue < size){
+             programmeCounter = jumpValue-1;
+             return;
         }
         throw new IllegalArgumentException("Jump index is out of bounds");
     }
 
-    public int jumpnull(int parseInt, int programSize) {
+    public void jumpnull(int jumpValue, int programSize) {
         if (accumulator.equalZero()){
-            return jump(parseInt,programSize);
+             jump(jumpValue,programSize);
         }
-        return parseInt;
     }
 
-    public int jumpneg(int parseInt, int programSize) {
+    public void jumpneg(int parseInt, int programSize) {
         if (accumulator.neg()){
-            return jump(parseInt,programSize);
+             jump(parseInt,programSize);
         }
-        return parseInt;
     }
 
-    public int jumppos(int parseInt, int programSize) {
+    public void jumppos(int parseInt, int programSize) {
         if (accumulator.pos()){
-            return jump(parseInt,programSize);
+             jump(parseInt,programSize);
         }
-        return parseInt;
     }
 }
