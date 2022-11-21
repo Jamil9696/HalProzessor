@@ -41,9 +41,6 @@ public final class Logger {
         System.out.println();
     }
 
-    public boolean isDebugMode() {
-        return IS_DEBUG;
-    }
 
     public void debugInfo(String debugInfo) {
         if(!IS_DEBUG) return;

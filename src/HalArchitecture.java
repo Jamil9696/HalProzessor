@@ -31,12 +31,12 @@ public class HalArchitecture {
             return false;
         }
 
-        if (logger.isDebugMode()) {
-            logger.debugInfo(
-                    "Current PC: " + halProcessor.getProgrammeCounter() +
-                    ".Current Instruction: " + optional.get().getInstructionTyp().toString()
-            );
-        }
+
+        logger.debugInfo(
+                "Current PC: " + halProcessor.getProgrammeCounter() +
+                ".Current Instruction: " + optional.get().getInstructionTyp().toString()
+        );
+
 
         if(!decode(optional.get())){
             return false;
