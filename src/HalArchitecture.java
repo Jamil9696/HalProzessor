@@ -7,7 +7,9 @@ public class HalArchitecture {
     private final HalProcessor halProcessor;
     private final InputInterface inputInterface;
     private final OutputInterface outputInterface;
-    private boolean isStarted = false;
+    private boolean isDebug = true;
+
+    private final Logger logger = Logger.getInstance();
 
 
     public HalArchitecture(
@@ -29,67 +31,102 @@ public class HalArchitecture {
             return false;
         }
 
-        decode(optional.get());
+        if (logger.isDebugMode()) {
+            logger.debugInfo(
+                    "Current PC: " + halProcessor.getProgrammeCounter() +
+                    ".Current Instruction: " + optional.get().getInstructionTyp().toString()
+            );
+        }
+
+        if(!decode(optional.get())){
+            return false;
+        }
+
 
         halProcessor.incrementPC();
-        //System.out.println("Current PC: " + halProcessor.getProgrammeCounter());
         return true;
     }
 
-    public void decode(Instruction instruction) {
+    public boolean decode(Instruction instruction) {
 
         //  don't use enhanced switch (won't compile)
         switch (instruction.getInstructionTyp()) {
             case START:
-                isStarted = true; // purpose
                 break;
             case STOP:
-                System.exit(0);
-                break;
+                return false;
             case IN:
+                logger.debug("accumulator");
                 halProcessor.in(inputInterface.read());
+                logger.info();
                 break;
             case OUT:
                 outputInterface.print(halProcessor.out());
                 break;
             case LOAD:
+                logger.debug("register");
                 halProcessor.in(programMemory.load(Float.valueOf(instruction.registerNumber())));
+                logger.info();
                 break;
             case LOADIND:
-                halProcessor.in(Integer.valueOf(instruction.registerNumber()));//
+                logger.debug("register " + instruction.registerNumber());
+                halProcessor.in(Integer.valueOf(instruction.registerNumber()));
+                logger.info();
                 break;
             case LOADNUM:
-                halProcessor.in(Float.valueOf(instruction.registerNumber()));//
+                logger.debug("register " + instruction.registerNumber());
+                halProcessor.in(Float.valueOf(instruction.registerNumber()));
+                logger.info();
                 break;
             case STORE:
+                logger.debug("register " + instruction.registerNumber());
                 programMemory.store(halProcessor.out(), Float.valueOf(instruction.registerNumber()));
+                logger.info();
                 break;
             case STOREIND:
+                logger.debug("register " + instruction.registerNumber());
                 programMemory.store(halProcessor.out(), Integer.valueOf(instruction.registerNumber()));
+                logger.info();
                 break;
             case ADD:
+                logger.debug("accumulator");
                 halProcessor.add(programMemory.load(Float.valueOf(instruction.registerNumber())));
+                logger.info();
                 break;
             case ADDNUM:
+                logger.debug("accumulator");
                 halProcessor.add(Float.valueOf(instruction.registerNumber()));// constant
+                logger.info();
                 break;
             case SUB:
+                logger.debug("accumulator");
                 halProcessor.sub(programMemory.load(Float.valueOf(instruction.registerNumber())));
+                logger.info();
                 break;
             case SUBNUM:
+                logger.debug("accumulator");
                 halProcessor.sub(Float.valueOf(instruction.registerNumber()));// constant
+                logger.info();
                 break;
             case DIV:
+                logger.debug("accumulator");
                 halProcessor.div(programMemory.load(Float.valueOf(instruction.registerNumber())));
+                logger.info();
                 break;
             case DIVNUM:
+                logger.debug("accumulator");
                 halProcessor.div(Float.valueOf(instruction.registerNumber()));// constant
+                logger.info();
                 break;
             case MUL:
+                logger.debug("accumulator");
                 halProcessor.mul(programMemory.load(Float.valueOf(instruction.registerNumber())));
+                logger.info();
                 break;
             case MULNUM:
-                halProcessor.mul(Float.valueOf(instruction.registerNumber()));// constant
+                logger.debug("accumulator");
+                halProcessor.mul(Float.valueOf(instruction.registerNumber()));
+                logger.info();
                 break;
             case JUMP:
                  halProcessor.jump(Integer.parseInt(instruction.registerNumber()), programMemory.getProgramSize());
@@ -106,6 +143,8 @@ public class HalArchitecture {
             default:
                 System.out.println("Invalid instruction");
         }
+
+        return true;
     }
 
 

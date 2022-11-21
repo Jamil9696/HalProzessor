@@ -6,6 +6,7 @@ public class HalProcessor {
     private final Accumulator accumulator;
     private int programmeCounter = 0;
 
+
     public int getProgrammeCounter(){
         return programmeCounter;
     }
@@ -15,6 +16,7 @@ public class HalProcessor {
     }
 
     public HalProcessor( Accumulator accumulator) {
+
         this.accumulator = accumulator;
     }
 
@@ -23,22 +25,28 @@ public class HalProcessor {
     }
 
     public void sub(Float value) {
+
         accumulator.sub(value);
     }
 
     public void div(Float value) {
+
         accumulator.div(value);
     }
 
     public void mul(Float value) {
+
         accumulator.mul(value);
     }
 
     public void in(Integer parameter){in(parameter.floatValue());}
 
-    public void in(Float parameter) {accumulator.overwrite(parameter);}
+    public void in(Float parameter) {
+        accumulator.overwrite(parameter);}
 
-    public Float out(){return accumulator.getCurrentValue();}
+    public Float out(){
+        return accumulator.getCurrentValue();
+    }
 
     public void jump(int jumpValue, int size) {
         if(jumpValue >= 0 && jumpValue < size){
