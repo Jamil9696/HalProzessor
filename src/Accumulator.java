@@ -8,7 +8,6 @@ public class Accumulator {
 
     public void overwrite(Float value){
 
-
         this.value = value;
         logger.log(value);
 
