@@ -3,6 +3,8 @@ public enum InstructionSet {
     START,
     STOP,
     OUT,
+    BUFOUT,
+    BUFIN,
     IN,
     LOAD,
     LOADNUM,
@@ -21,8 +23,4 @@ public enum InstructionSet {
     JUMPPOS,
     JUMPNULL,
     JUMP;
-
-    public String getType(){
-        return this.toString();
-    }
 }

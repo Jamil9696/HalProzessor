@@ -39,13 +39,17 @@ public class HalProcessor {
         accumulator.mul(value);
     }
 
-    public void in(Integer parameter){in(parameter.floatValue());}
+    public void in(Integer parameter){
+        in(parameter.floatValue());
+    }
 
     public void in(Float parameter) {
-        accumulator.overwrite(parameter);}
+        accumulator.overwrite(parameter);
+    }
 
     public Float out(){
         return accumulator.getCurrentValue();
+
     }
 
     public void jump(int jumpValue, int size) {

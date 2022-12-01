@@ -22,28 +22,40 @@ public final class Logger {
     public void debug(String _target){
         if(!IS_DEBUG) return;
 
-        if(!_target.equals(TARGET)) {
-            TARGET = _target;
-            VALUE = 0f;
+        synchronized (Logger.getInstance()) {
+            if (!_target.equals(TARGET)) {
+                TARGET = _target;
+                VALUE = 0f;
+            }
+            System.out.println("Before Data change in " + TARGET + ". Value: " + VALUE);
         }
-        System.out.println("Before Data change in " + TARGET + ". Value: " + VALUE);
     }
 
     public void log(Float _value){
         if(!IS_DEBUG) return;
-        VALUE = _value;
+
+        synchronized (Logger.getInstance()) {
+            VALUE = _value;
+        }
     }
 
 
     public void info(){
         if(!IS_DEBUG) return;
-        System.out.println( "After Data change in " + TARGET + ". Value: " + VALUE);
-        System.out.println();
+
+        synchronized (Logger.getInstance()) {
+            System.out.println("After Data change in " + TARGET + ". Value: " + VALUE);
+            System.out.println();
+        }
     }
 
 
     public void debugInfo(String debugInfo) {
         if(!IS_DEBUG) return;
-        System.out.println(debugInfo);
+
+        synchronized (Logger.getInstance()){
+            System.out.println(debugInfo);
+        }
+
     }
 }

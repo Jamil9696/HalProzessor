@@ -7,7 +7,7 @@ public class Main {
         System.out.println("Args: " + args);
         Logger logger = Logger.getInstance();
 
-        HalArchitectureSystem halArchitectureSystem = new HalArchitectureSystem();
+        HalThreadSystem halArchitectureSystem = new HalThreadSystem();
 
         if(args.length > 1 && args[args.length-2].equals("-d")) {
             logger.setDebugMode(true);
@@ -19,5 +19,8 @@ public class Main {
            halArchitectureSystem.setUp(args[args.length-1]);
 
         }
+
+        long end = System.currentTimeMillis();
+        System.out.println("Elapsed Time in milli seconds: "+ (end - start));
     }
 }

@@ -34,9 +34,11 @@ public class ProgramMemory {
     }
 
     public void store(Float data, Float index) {
+
         dataStorage.setValue(index,data);
     }
     public void store(Float data, Integer index) {
+
         dataStorage.setValue(index,data);
     }
 
@@ -44,6 +46,7 @@ public class ProgramMemory {
         return dataStorage.getValue(index);
     }
     public Float load(Float index) {
+
         return load(index.intValue());
     }
 

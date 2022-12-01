@@ -9,7 +9,7 @@ import java.util.*;
 
 public class HalConfigReader {
 
-    private final Map<Integer,List<String[]>> instructionLists;
+    private final Map<String,List<String[]>> instructionLists;
     private final List<String> filePaths;
     private final List<String[]> edges; // of graph
 
@@ -65,7 +65,8 @@ public class HalConfigReader {
     private void readFile(String filePath) throws IOException {
 
         if(!checkFilePath(filePath)) return;
-        instructionLists.put(instructionLists.size(), new ArrayList<>());
+        String key = "p" + instructionLists.size();
+        instructionLists.put(key, new ArrayList<>());
 
         File halProgram = new File(filePath);
         try (final BufferedReader buffRead = new BufferedReader(new FileReader(halProgram))) {
@@ -73,7 +74,7 @@ public class HalConfigReader {
             while ((line = buffRead.readLine()) != null && !Objects.equals(line, "")) {
 
                 String[] argv = line.split(" ");
-                convertToInstruction(instructionLists.size(), argv);
+                convertToInstruction(key, argv);
             }
         }
     }
@@ -81,13 +82,12 @@ public class HalConfigReader {
 
     private boolean checkFilePath(String filePath){
         if(Files.exists(Path.of(filePath))) return true;
-
         System.out.println("Invalid file path!");
         return true;
     }
 
 
-    private void convertToInstruction(Integer key, String[] args){
+    private void convertToInstruction(String key, String[] args){
 
         if(args[0].chars().allMatch(Character::isDigit)){
 
@@ -98,8 +98,13 @@ public class HalConfigReader {
     }
 
 
-    public Map<Integer,List<String[]>> getInstructionParams(){
+    public Map<String,List<String[]>> getInstructionParams(){
+
         return instructionLists;
+    }
+
+    public List<String[]> getEdges(){
+        return edges;
     }
 
 

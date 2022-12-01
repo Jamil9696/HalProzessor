@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Optional;
 
-public class HalArchitecture {
+public class HalArchitecture{
 
     private final ProgramMemory programMemory;
     private final HalProcessor halProcessor;
@@ -10,6 +10,7 @@ public class HalArchitecture {
     private boolean isDebug = true;
 
     private final Logger logger = Logger.getInstance();
+
 
 
     public HalArchitecture(
@@ -22,6 +23,8 @@ public class HalArchitecture {
         this.inputInterface = inputInterface;
         this.outputInterface = outputInterface;
     }
+
+
 
 
     public boolean fetch() {
@@ -57,11 +60,19 @@ public class HalArchitecture {
                 return false;
             case IN:
                 logger.debug("accumulator");
-                halProcessor.in(inputInterface.read());
+                halProcessor.in(inputInterface.input());
                 logger.info();
                 break;
             case OUT:
                 outputInterface.print(halProcessor.out());
+                break;
+            case BUFIN:
+                logger.debug("accumulator");
+                halProcessor.in(inputInterface.read(Integer.parseInt(instruction.registerNumber())));
+                logger.info();
+                break;
+            case BUFOUT:
+                outputInterface.send(halProcessor.out(), Integer.valueOf(instruction.registerNumber()));
                 break;
             case LOAD:
                 logger.debug("register");
@@ -160,6 +171,27 @@ public class HalArchitecture {
     public void initProgramMemory(List<String[]> params) {
         params.forEach(param -> initProgramMemory(param[0], param[1]));
     }
+
+    public Buffer getBuffer(int i, boolean readOnly){
+        if(readOnly){
+            return inputInterface.getBuffer(i);
+        }else {
+            return outputInterface.getBuffer(i);
+        }
+    }
+
+
+    public void addBuffer(Buffer buffer,int i, boolean readOnly) {
+        if(i < 0) return;
+
+        if(readOnly){
+            inputInterface.addBuffer(buffer, i);
+        }else{
+            outputInterface.addBuffer(buffer, i);
+        }
+    }
+
+
 
 
 }
