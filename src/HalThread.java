@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class HalThread implements HalRunnable{
 
@@ -16,7 +14,6 @@ public class HalThread implements HalRunnable{
         );
        this.halArchitecture.initProgramMemory(instructionParam);
        this.name = threadName;
-
     }
 
     @Override
@@ -34,10 +31,8 @@ public class HalThread implements HalRunnable{
         halArchitecture.addBuffer(buffer, i, readOnly);
     }
 
-
     @Override
     public void run() {
       while (halArchitecture.fetch());
-
     }
 }

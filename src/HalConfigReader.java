@@ -81,7 +81,8 @@ public class HalConfigReader {
 
 
     private boolean checkFilePath(String filePath){
-        if(Files.exists(Path.of(filePath))) return true;
+        if(Files.exists(Path.of(filePath)))
+            return true;
         System.out.println("Invalid file path!");
         return true;
     }

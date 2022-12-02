@@ -8,5 +8,4 @@ C:\Users\jamil\IdeaProjects\demo\HalProzessor\executable\hal-program3.txt
 0:3 > 1:5 # Hallo test
 1:3 > 2:5
 2:3 < 0:6
-2:3
 
