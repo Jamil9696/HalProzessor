@@ -15,8 +15,12 @@ public class InputInterface {
     }
 
     void addBuffer(Buffer buffer, int i){
-        if(i >= buffers.size())
-            getBuffer(i-1);
+        if(i > buffers.size()){
+            for(int j = i; j > buffers.size(); --j){
+                buffers.add(new Buffer());
+                Logger.getInstance().debugInfo("InputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size() - 1) + " hinzugefügt");
+            }
+        }
 
         buffers.add(buffer);
         Logger.getInstance().debugInfo("InputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size() - 1) + " hinzugefügt");
@@ -26,9 +30,9 @@ public class InputInterface {
 
     Buffer getBuffer(int i){
         if(i >= buffers.size()){
-            buffers.add(new Buffer());
-            Logger.getInstance().debugInfo("InputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size() -1) + " hinzugefügt");
-            getBuffer(i);
+            for(int j = buffers.size(); j <= i; j++){
+                buffers.add(new Buffer());
+            }
         }
 
         return buffers.get(i);

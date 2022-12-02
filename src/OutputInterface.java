@@ -14,22 +14,26 @@ public class OutputInterface {
     }
 
     void addBuffer(Buffer buffer, int i){
-        if(i > buffers.size())
-            getBuffer(i-1);
+        if(i >= buffers.size()){
+            for(int j = i; j > buffers.size(); --j){
+              buffers.add(new Buffer());
+            }
+        }
+
 
         buffers.add(buffer);
-        Logger.getInstance().debugInfo("OutputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size()-1) + " hinzugefügt");
+        // Logger.getInstance().debugInfo("OutputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size()-1) + " hinzugefügt");
 
 
     }
 
     Buffer getBuffer(int i){
         if(i >= buffers.size()){
-
-            buffers.add(new Buffer());
-            Logger.getInstance().debugInfo("OutputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size()-1)+ " hinzugefügt");
-            getBuffer(i);
+            for(int j = i; j > buffers.size(); --j){
+                buffers.add(new Buffer());
+            }
         }
+        // Logger.getInstance().debugInfo("OutputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size()-1)+ " hinzugefügt");
 
         return buffers.get(i);
     }

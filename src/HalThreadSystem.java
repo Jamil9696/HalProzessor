@@ -79,8 +79,19 @@ public class HalThreadSystem {
 
         for (int i = 0; i < halThreads.size(); i++){
             threads.add(new Thread(halThreads.get(i)));
-            threads.get(i).run(); // start() echt parallel
         }
+
+        for (int i = 0; i < halThreads.size(); i++){
+            threads.get(i).start();
+        }
+
+        /*for (int i = halThreads.size()-1; i >= 0; i--){
+            threads.get(i).start();
+        }*/
+
+
+
+
 
         while (true);
 

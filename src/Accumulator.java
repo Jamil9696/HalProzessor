@@ -20,23 +20,23 @@ public class Accumulator {
     public void add (Float value2){
 
         value += value2;
-        logger.log(value);
+        //logger.log(value);
     }
 
     public void sub (Float value2){
 
         value -= value2;
-        logger.log(value);
+        //logger.log(value);
     }
 
     public void div (Float value2){
         value /= value2;
-        logger.log(value);
+        //logger.log(value);
     }
 
     public void mul (Float value2){
         value *= value2;
-        logger.log(value);
+       // logger.log(value);
     }
     public boolean equalZero() {
         return value == 0;

@@ -3,8 +3,6 @@ public enum InstructionSet {
     START,
     STOP,
     OUT,
-    BUFOUT,
-    BUFIN,
     IN,
     LOAD,
     LOADNUM,
