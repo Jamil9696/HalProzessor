@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public final class Logger {
 
     private static boolean IS_DEBUG = false;
@@ -57,5 +59,12 @@ public final class Logger {
             System.out.println(debugInfo);
         }
 
+    }
+
+    public synchronized float synchronizedInput(String name){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(name + " IN: ");
+        Float  input = scanner.nextFloat();
+        return input;
     }
 }

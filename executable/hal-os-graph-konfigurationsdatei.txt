@@ -1,0 +1,11 @@
+# HAL - Prozessoren:
+C:\Users\jamil\IdeaProjects\demo\HalProzessor\executable\hal-os-graph-program.txt
+C:\Users\jamil\IdeaProjects\demo\HalProzessor\executable\hal-os-graph-program2.txt
+C:\Users\jamil\IdeaProjects\demo\HalProzessor\executable\hal-os-graph-program3.txt
+C:\Users\jamil\IdeaProjects\demo\HalProzessor\executable\hal-os-graph-program4.txt
+
+# HAL - Verbindungen (alle verbindungen -1, da index bei 0 beginnt)
+0:3 > 3:1 #p0 IN = 3, p3 IN = 2
+1:1 > 0:2 #p1 IN = 0
+2:1 > 0:1 #p2 IN = 3
+2:2 < 1:2

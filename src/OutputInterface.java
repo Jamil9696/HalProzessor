@@ -5,35 +5,37 @@ public class OutputInterface {
 
 
     private List<Buffer> buffers = new ArrayList<>();
+    private final Logger logger = Logger.getInstance();
 
 
 
     public void print(Float out) {
-        System.out.println("OUT: " + out);
+
+        System.out.println(Thread.currentThread().getName() + " OUT: " + out);
 
     }
 
     void addBuffer(Buffer buffer, int i){
         if(i >= buffers.size()){
-            for(int j = i; j > buffers.size(); --j){
-              buffers.add(new Buffer());
+            for(int j = buffers.size(); j < i; j++){
+                buffers.add(new Buffer());
+                Logger.getInstance().debugInfo("OutputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size() - 1) + " hinzugefügt");
             }
         }
 
 
         buffers.add(buffer);
-        // Logger.getInstance().debugInfo("OutputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size()-1) + " hinzugefügt");
-
+        Logger.getInstance().debugInfo("OutputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size()-1)+ " hinzugefügt");
 
     }
 
     Buffer getBuffer(int i){
         if(i >= buffers.size()){
-            for(int j = i; j > buffers.size(); --j){
+            for(int j = buffers.size(); j <= i; j++){
                 buffers.add(new Buffer());
+                Logger.getInstance().debugInfo("OutputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size() - 1) + " hinzugefügt");
             }
         }
-        // Logger.getInstance().debugInfo("OutputBuffer: " + buffers.get(buffers.size()-1).toString() +" an der Stelle: " + (buffers.size()-1)+ " hinzugefügt");
 
         return buffers.get(i);
     }

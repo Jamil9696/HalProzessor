@@ -36,28 +36,28 @@ public class HalArchitecture{
 
 
         logger.debugInfo(
-                "Current PC: " + halProcessor.getProgrammeCounter() +
+                Thread.currentThread().getName() + " current PC: " + halProcessor.getProgrammeCounter() +
                 ".Current Instruction: " + optional.get().getInstructionTyp().toString()
         );
 
 
-        if(!decode(optional.get())){
-            return false;
-        }
+        decode(optional.get());
+
 
 
         halProcessor.incrementPC();
         return true;
     }
 
-    public boolean decode(Instruction instruction) {
+    public void decode(Instruction instruction) {
 
         //  don't use enhanced switch (won't compile)
         switch (instruction.getInstructionTyp()) {
             case START:
                 break;
             case STOP:
-                return false;
+                System.out.println(Thread.currentThread().getName() + " stops");
+                System.exit(-1);
             case IN:
                // logger.debug("accumulator");
                 executeInInstruction(instruction.registerNumber());
@@ -147,7 +147,6 @@ public class HalArchitecture{
                 System.out.println("Invalid instruction");
         }
 
-        return true;
     }
 
 

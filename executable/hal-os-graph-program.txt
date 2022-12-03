@@ -1,0 +1,6 @@
+1 IN 2
+2 STORE 2
+3 IN 1
+3 ADD 2
+4 OUT 3
+5 JUMP 1

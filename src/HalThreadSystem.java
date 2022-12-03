@@ -78,14 +78,14 @@ public class HalThreadSystem {
         List<Thread> threads = new ArrayList<>();
 
         for (int i = 0; i < halThreads.size(); i++){
-            threads.add(new Thread(halThreads.get(i)));
+            threads.add(new Thread(halThreads.get(i),"p"+i));
         }
 
-        for (int i = 0; i < halThreads.size(); i++){
+       for (int i = 0; i < halThreads.size(); i++){
             threads.get(i).start();
         }
-
-        /*for (int i = halThreads.size()-1; i >= 0; i--){
+       /*
+        for (int i = halThreads.size()-1; i >= 0; i--){
             threads.get(i).start();
         }*/
 
@@ -94,6 +94,7 @@ public class HalThreadSystem {
 
 
         while (true);
+
 
     }
 
