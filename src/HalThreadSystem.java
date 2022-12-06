@@ -81,9 +81,18 @@ public class HalThreadSystem {
             threads.add(new Thread(halThreads.get(i),"p"+i));
         }
 
-       for (int i = 0; i < halThreads.size(); i++){
+        for (int i = 0; i < halThreads.size(); i++){
             threads.get(i).start();
         }
+      /*
+        threads.get(0).start();
+        threads.get(1).start();
+        threads.get(2).start();
+        threads.get(3).start();*/
+
+       /*for (int i = 0; i < halThreads.size(); i++){
+            threads.get(i).start();
+        }*/
        /*
         for (int i = halThreads.size()-1; i >= 0; i--){
             threads.get(i).start();
