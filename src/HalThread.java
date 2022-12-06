@@ -17,11 +17,6 @@ public class HalThread implements HalRunnable{
     }
 
     @Override
-    public String getThreadName() {
-      return name;
-    }
-
-    @Override
     public Buffer getBuffer(int i, boolean readOnly) {
         return halArchitecture.getBuffer(i,readOnly);
     }

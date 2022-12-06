@@ -1,8 +1,8 @@
-# HAL - Prozessoren:
-C:\Users\jamil\IdeaProjects\demo\HalProzessor\executable\hal-os-program.txt
-C:\Users\jamil\IdeaProjects\demo\HalProzessor\executable\hal-os-program2.txt
-C:\Users\jamil\IdeaProjects\demo\HalProzessor\executable\hal-os-program3.txt
-C:\Users\jamil\IdeaProjects\demo\HalProzessor\executable\hal-os-program4.txt
+# HAL - Prozessoren: (hier den Path)
+hal-os-program.txt
+hal-os-program2.txt
+hal-os-program3.txt
+hal-os-program4.txt
 
 # HAL - Verbindungen
 0:3 > 1:2
