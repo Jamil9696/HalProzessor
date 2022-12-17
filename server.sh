@@ -24,11 +24,3 @@ while true
 do
     receive
 done
-
-
-
-
-
-
-
-
