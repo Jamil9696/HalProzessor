@@ -1,4 +1,3 @@
-
 receive(){
      if  [ -s data.txt ]; then
         echo "received " | cat data.txt
@@ -9,15 +8,15 @@ receive(){
 }
 
 send(){
-
-    echo "received" | nc localhost 4444 > data.txt
+    echo "received" | nc 54321 > data.txt
 }
 
 startServer(){
-  nc -lvp 4447 > data.txt &
+  echo "startServer"
+  nc -l -p 54321 -v > data.txt &
+  echo "startServer done"
 }
 startServer
-echo "connection done"
 while (true)
 do
     receive

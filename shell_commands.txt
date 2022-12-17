@@ -3,3 +3,4 @@ nc -v bs.server.internal 4445
 
 #Für Server
 sh server.sh
+server & client ip 172.20.140.109

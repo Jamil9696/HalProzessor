@@ -4,12 +4,11 @@ receive(){
 }
 
 connectToServer(){
-   nc -v localhost 4447 &
-   ping localhost 4447
-
+   nc localhost 54321 &
 }
 send(){
-  echo $choice | nc localhost 4447
+  echo "Your input: $choice"
+  echo $choice | nc localhost 54321 &
 }
 connectToServer
 
@@ -21,7 +20,6 @@ do
    echo "    q    Quit"
    read choice
    send
-   receive
 
 
 
