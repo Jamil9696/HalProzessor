@@ -1,0 +1,5 @@
+# Für Client
+nc -v bs.server.internal 4445
+
+#Für Server
+sh server.sh
