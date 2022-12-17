@@ -9,7 +9,24 @@ send(){
 
 }
 
+# generate hash iterations
+initNewPassword(){
+   echo "Enter new password"
+   read newHash
+   echo "Enter password strength (integer Value)"
+   read n
+
+   i=0
+   while [ "$i" -le "$n" ]; do
+       newHash=$(openssl passwd -1 -salt 12 "$newHash")
+       echo "pwd $i: $newHash"
+       i=$(( i + 1 ))
+   done
+   echo "your final hash is: $newHash"
+}
+
 connectionToClient
+initNewPassword
 
 while true
 do
