@@ -1,24 +1,20 @@
 
-receive(){
-  nc -l -p 4444
-}
 
-connectToServer(){
-   nc localhost 54321 &
-}
+
 send(){
+  read choice
   echo "Your input: $choice"
-  echo $choice | nc localhost 54321 &
-}
-connectToServer
+  echo  $choice | timeout 0.5 nc -n 127.0.0.1 54321
 
-while (true)
+}
+
+while true
 do
    echo "======  Lab: Shell Programming (BS)  ======"
    echo "    r    Register"
    echo "    l    Login"
    echo "    q    Quit"
-   read choice
+
    send
 
 
