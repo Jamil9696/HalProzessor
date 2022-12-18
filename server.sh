@@ -1,19 +1,18 @@
 
 receive(){
-     if  [ -s data.txt ]; then
-        echo "" | cat data.txt
+     if  [ -s registerClient.txt ]; then
+        echo "" | cat registerClient.txt
         succeedMessage
-        args=$(cat data.txt)
+        #args=$(cat registerClient.txt)
+        #echo "works with $args"
 
-        echo "works with $args"
-
-        truncate -s 0 data.txt
+        truncate -s 0 registerClient.txt
      fi
 }
 
 
 succeedMessage(){
-  readData=$(cat data.txt)
+  readData=$(cat registerClient.txt)
   echo "Server sends back: $readData" | timeout 1 nc -n 127.0.0.1 55555
 
 }
@@ -33,7 +32,7 @@ lamportAuthorisation(){
   done
 }
 #succeedMessage
-
+connectionToServer
 while true
 do
     receive
