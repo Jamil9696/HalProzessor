@@ -17,43 +17,65 @@ hashPw(){
 }
 
 sendCredentials(){
+  hashPw
   echo "send credentials: $username $newHash $n"
   args="$username $newHash $n"
   sendToServer
 }
+sendUsername(){
+  args="$username"
+  echo "send username: $args"
+  sendToServer
+}
+
+sendHashPW(){
+  args="$hashPw"
+  echo "send hashPw: $args"
+  sendToServer
+}
+
 
 
 # ============================= Register Client ===============
-initNewPassword(){
+enterUserNamePwd(){
+  echo "username: "
+  read username
   echo "Enter new password"
   read newHash
   c=0
-  hashPw
 }
 
 register(){
   echo "----- R E G I S T E R -----"
-  echo "username: "
-  read username
-  initNewPassword
+  enterUserNamePwd
   sendCredentials
   listenToServer
   echo "$args"
-
 }
 
 # ============================  Login Client ==================
 login(){
   echo "----- L O G I N -----"
-    echo "username: "
-    read username
-    echo "password: "
-    read newHash
+  #send Credentials to server
+  enterUserNamePwd
+  sendUsername
+  listenToServer
 
-    # server sendet c ->
-    c=0
-    hashPw
-    sendCredentials
+  # if( user doesn't exists )
+  if [ "$args" = "false" ] ; then
+      echo "credentials are wrong"
+      return
+  fi
+
+  # else {server has sent c to client}
+  c=$args
+  echo "c-value: $c"
+  hashPw
+  sendHashPW
+  # wait for response
+  listenToServer
+  echo "$args"
+
 }
 
 #======================== Program start ================

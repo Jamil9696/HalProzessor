@@ -9,7 +9,6 @@ if [ -z "$args" ] ; then
      return
   else
 
-
  receive(){
       if  [ -s registerClient.txt  ]; then
          echo "" | cat registerClient.txt
