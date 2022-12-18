@@ -1,12 +1,16 @@
-receive(){
 
+receive(){
      if  [ -s data.txt ]; then
         echo "" | cat data.txt
         succeedMessage
+        args=$(cat data.txt)
+
+        echo "works with $args"
+
         truncate -s 0 data.txt
      fi
-
 }
+
 
 succeedMessage(){
   readData=$(cat data.txt)
@@ -15,11 +19,21 @@ succeedMessage(){
 }
 
 connectionToServer(){
-  nc -l -p 54321 -v > data.txt &
+  nc -l -p 54321 -v > registerClient.txt &
   echo "Server is running"
 }
 
-connectionToServer
+lamportAuthorisation(){
+  c=1
+  while [ "$c" -le "$n" ]; do
+      if  [ "$P" == "$(echo -n "$newHash" | sha1sum | awk '{print $1}')" ]; then
+          i=$(( i + 1 ))
+          P = $( (Pc) )
+      fi
+  done
+}
+#succeedMessage
+
 while true
 do
     receive
