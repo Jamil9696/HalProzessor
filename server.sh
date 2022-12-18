@@ -1,49 +1,65 @@
-
-receive(){
-     if  [ -s registerClient.txt  ]; then
-        echo "" | cat registerClient.txt
-        succeedMessage
-        args=$(cat registerClient.txt)
-        echo "works with $args"
-
-        truncate -s 0 registerClient.txt
-     fi
+# ================== non repeating functions ==========
+sendToClient(){
+  echo "$args" | timeout 1 nc -n 127.0.0.1 55555
 }
-receiveCredentials(){
+listenToClient(){
+  args=$(nc -l -p 54321 -v &)
+}
 
-  if [ -z "$args" ] ; then
-     return
+# ================== register client ===================
+
+saveUser(){
+  listenToClient
+  grepUser
+  if [ -z "$hasValue" ] ; then
+      echo $args >> saveUser.txt
+      args="User: $firstArg has been registered"
+      sendToClient
   else
-       echo "works with $args"
-       succeedMessage
+      args="User: $firstArg is already registered"
+      sendToClient
   fi
 }
 
+# ================== login client =====================
 
-succeedMessage(){
-  #readData=$(cat registerClient.txt)
-  echo "Server sends back: $args" | timeout 1 nc -n 127.0.0.1 55555
-  args=noArgs
+grepUser(){
+  firstArg=$(echo -n "$args" | awk '{print $1}')
+  secondArg=$(echo -n "$args" | awk '{print $2}')
+  thirdArg=$(echo -n "$args" | awk '{print $3}')
+  hasValue=$(cat saveUser.txt | grep "$firstArg")
+  echo "Log: find User: $hasValue"
+
 }
 
-connectionToServer(){
+lookForUser(){
+  listenToClient
+  grepUser
 
-  args=$(nc -l -p 54321 -v &)
-  echo "Server is running"
+  if [ -z "$hasValue" ] ; then
+    args="User is not registered"
+    sendToClient
+    return
+  else
+    args="$thirdArg"
+    sendToClient
+  fi
+
 }
 
-lamportAuthorisation(){
-  c=1
-  while [ "$c" -le "$n" ]; do
-      if  [ "$P" == "$(echo -n "$newHash" | sha1sum | awk '{print $1}')" ]; then
-          i=$(( i + 1 ))
-          P = $( (Pc) )
-      fi
-  done
-}
+#================= program start ========================
 
-connectionToServer
+echo "Server is running"
 while true
 do
-    receiveCredentials
+   listenToClient
+   case $args in
+      r)
+         saveUser
+         ;;
+      l)
+         lookForUser
+         ;;
+   esac
+
 done

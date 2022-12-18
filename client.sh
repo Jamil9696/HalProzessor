@@ -1,27 +1,10 @@
-connectionToClient(){
-  nc -l -p 55555 -v &
+# ============================ non repeating functions =========
+sendToServer(){
+  echo  "$args" | timeout 1 nc -n 127.0.0.1 54321
 }
 
-send(){
-  read choice
-  echo "Your input: $choice"
-  echo  $choice | timeout 0.5 nc -n 127.0.0.1 54321
-
-}
-
-sendCredentials(){
-  echo "send credentials: $username $newHash $n"
-  echo "$username $newHash $n" | timeout 1 nc -n 127.0.0.1 54321
-}
-
-# generate hash iterations
-
-initNewPassword(){
-  echo "Enter new password"
-  read newHash
-
-  c=0
-  hashPw
+listenToServer(){
+  args=$(nc -l -p 55555 -v &)
 }
 
 hashPw(){
@@ -29,19 +12,37 @@ hashPw(){
    i=0
    while [ "$i" -le "$((n - c))" ]; do
       newHash=$(echo -n "$newHash" | sha1sum | awk '{print $1}')
-      echo "pwd $i: $newHash"
       i=$(( i + 1 ))
    done
 }
+
+sendCredentials(){
+  echo "send credentials: $username $newHash $n"
+  args="$username $newHash $n"
+  sendToServer
+}
+
+
+# ============================= Register Client ===============
+initNewPassword(){
+  echo "Enter new password"
+  read newHash
+  c=0
+  hashPw
+}
+
 register(){
   echo "----- R E G I S T E R -----"
   echo "username: "
   read username
   initNewPassword
-
+  sendCredentials
+  listenToServer
+  echo "$args"
 
 }
 
+# ============================  Login Client ==================
 login(){
   echo "----- L O G I N -----"
     echo "username: "
@@ -55,22 +56,22 @@ login(){
     sendCredentials
 }
 
-
-connectionToClient
-
+#======================== Program start ================
 while true
 do
    echo "======  Lab: Shell Programming (BS)  ======"
    echo "    r    Register"
    echo "    l    Login"
    echo "    q    Quit"
-   read choice
-
-   case $choice in
+   read args
+   case $args in
    r)
+      sendToServer
       register
+
       ;;
    l)
+      sendToServer
       login
       ;;
    q)

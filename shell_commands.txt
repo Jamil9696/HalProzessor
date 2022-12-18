@@ -4,3 +4,19 @@ nc -v bs.server.internal 4445
 #Für Server
 sh server.sh
 server & client ip 172.20.140.109
+
+if [ -z "$args" ] ; then
+     return
+  else
+
+
+ receive(){
+      if  [ -s registerClient.txt  ]; then
+         echo "" | cat registerClient.txt
+         succeedMessage
+         args=$(cat registerClient.txt)
+         echo "works with $args"
+
+         truncate -s 0 registerClient.txt
+      fi
+ }
