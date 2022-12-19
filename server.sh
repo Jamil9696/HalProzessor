@@ -2,25 +2,9 @@
 sendToClient(){
   echo "$args" | timeout 1 nc -n 127.0.0.1 55555
 }
+
 listenToClient(){
   args=$(nc -l -p 54321 &)
-}
-compareHashValues(){
-
-  # e^n == e(p)
-  newHash=$(echo -n "$args" | sha1sum | awk '{print $1}')
-  firstArg=$(echo -n "$hasValue" | awk '{print $1}')
-  secondArg=$(echo -n "$hasValue" | awk '{print $2}')
-  thirdArg=$(echo -n "$hasValue" | awk '{print $3}')
-  fourthArg=$(echo -n "$hasValue" | awk '{print $4}')
-
-  echo " new index2:: $(( fourthArg + 1 ))"
-   if [ "$newHash" = "$secondArg" ] ; then
-        sed -i "s/$hasValue/$firstArg $args $thirdArg $(( fourthArg + 1 ))/" saveUser.txt
-        args="true"
-   else
-        args="Credentials are wrong"
-   fi
 }
 # ================== register client ===================
 saveUser(){
@@ -64,6 +48,26 @@ lookForUser(){
   # compare hash values
   compareHashValues
   sendToClient
+}
+
+updateUserPw(){
+  thirdArg=$(echo -n "$hasValue" | awk '{print $3}')
+  fourthArg=$(echo -n "$hasValue" | awk '{print $4}')
+  sed -i "s/$hasValue/$firstArg $args $thirdArg $(( fourthArg + 1 ))/" saveUser.txt
+}
+
+compareHashValues(){
+
+  # e^n == e(p)
+  newHash=$(echo -n "$args" | sha1sum | awk '{print $1}')
+  secondArg=$(echo -n "$hasValue" | awk '{print $2}')
+
+   if [ "$newHash" = "$secondArg" ] ; then
+        updateUserPw
+        args="true"
+   else
+        args="Credentials are wrong"
+   fi
 }
 #================= program start ========================
 echo "Server is running"
