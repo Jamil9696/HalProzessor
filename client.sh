@@ -14,11 +14,6 @@ hashPw(){
       i=$(( i + 1 ))
    done
 }
-sendCredentials(){
-  hashPw
-  args="$username $newHash $n"
-  sendToServer
-}
 sendUsername(){
   args="$username"
   sendToServer
@@ -28,8 +23,6 @@ sendHashPW(){
   args="$newHash"
   sendToServer
 }
-
-# ============================= Register Client ===============
 enterUserNamePwd(){
   echo "username: "
   read username
@@ -37,12 +30,18 @@ enterUserNamePwd(){
   read password
   c=0
 }
+# ============================= Register Client ===============
 register(){
   echo "----- R E G I S T E R -----"
   enterUserNamePwd
   sendCredentials
   listenToServer
   echo "$args"
+}
+sendCredentials(){
+  hashPw
+  args="$username $newHash $n"
+  sendToServer
 }
 # ============================  Login Client ==================
 login(){
