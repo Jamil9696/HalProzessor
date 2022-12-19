@@ -2,49 +2,41 @@
 sendToServer(){
   echo  "$args" | timeout 1 nc -n 127.0.0.1 54321
 }
-
 listenToServer(){
-  args=$(nc -l -p 55555 -v &)
+  args=$(nc -l -p 55555 &)
 }
-
 hashPw(){
    n=10
    i=0
+   newHash="$password"
    while [ "$i" -le "$((n - c))" ]; do
       newHash=$(echo -n "$newHash" | sha1sum | awk '{print $1}')
       i=$(( i + 1 ))
    done
 }
-
 sendCredentials(){
   hashPw
-  echo "send credentials: $username $newHash $n"
   args="$username $newHash $n"
   sendToServer
 }
 sendUsername(){
   args="$username"
-  echo "send username: $args"
   sendToServer
 }
 
 sendHashPW(){
-  args="$hashPw"
-  echo "send hashPw: $args"
+  args="$newHash"
   sendToServer
 }
-
-
 
 # ============================= Register Client ===============
 enterUserNamePwd(){
   echo "username: "
   read username
   echo "Enter new password"
-  read newHash
+  read password
   c=0
 }
-
 register(){
   echo "----- R E G I S T E R -----"
   enterUserNamePwd
@@ -52,7 +44,6 @@ register(){
   listenToServer
   echo "$args"
 }
-
 # ============================  Login Client ==================
 login(){
   echo "----- L O G I N -----"
@@ -66,7 +57,6 @@ login(){
       echo "credentials are wrong"
       return
   fi
-
   # else {server has sent c to client}
   c=$args
   echo "c-value: $c"
@@ -75,9 +65,7 @@ login(){
   # wait for response
   listenToServer
   echo "$args"
-
 }
-
 #======================== Program start ================
 while true
 do

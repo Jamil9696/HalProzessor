@@ -7,7 +7,7 @@ server & client ip 172.20.140.109
 
 if [ -z "$args" ] ; then
      return
-  else
+  els
 
  receive(){
       if  [ -s registerClient.txt  ]; then
