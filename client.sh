@@ -73,6 +73,7 @@ do
    echo "    r    Register"
    echo "    l    Login"
    echo "    q    Quit"
+   echo "select option: "
    read args
    case $args in
    r)
