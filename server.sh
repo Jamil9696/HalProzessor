@@ -6,6 +6,14 @@ sendToClient(){
 listenToClient(){
   args=$(nc -l -p 54321 &)
 }
+
+grepUser(){
+  firstArg=$(echo -n "$args" | awk '{print $1}')
+  secondArg=$(echo -n "$args" | awk '{print $2}')
+  thirdArg=$(echo -n "$args" | awk '{print $3}')
+
+  hasValue=$(cat saveUser.txt | grep "$firstArg")
+}
 # ================== register client ===================
 saveUser(){
   listenToClient
@@ -20,13 +28,7 @@ saveUser(){
   fi
 }
 # ================== login client =====================
-grepUser(){
-  firstArg=$(echo -n "$args" | awk '{print $1}')
-  secondArg=$(echo -n "$args" | awk '{print $2}')
-  thirdArg=$(echo -n "$args" | awk '{print $3}')
 
-  hasValue=$(cat saveUser.txt | grep "$firstArg")
-}
 lookForUser(){
   listenToClient
   grepUser
