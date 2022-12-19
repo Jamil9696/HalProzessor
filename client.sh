@@ -2,9 +2,11 @@
 sendToServer(){
   echo  "$args" | timeout 1 nc -n 127.0.0.1 54321
 }
+
 listenToServer(){
   args=$(nc -l -p 55555 &)
 }
+
 hashPw(){
    n=10
    i=0
@@ -14,11 +16,11 @@ hashPw(){
       i=$(( i + 1 ))
    done
 }
+
 sendUsername(){
   args="$username"
   sendToServer
 }
-
 sendHashPW(){
   args="$newHash"
   sendToServer
@@ -29,6 +31,21 @@ enterUserNamePwd(){
   echo "Enter new password"
   read password
   c=0
+}
+dataFetch(){
+  echo "file name: "
+  read path
+  dir="/etc/hosts"
+  #Look for it
+  if [ "$path" = "/etc/hosts" ] ; then
+      echo "file exists"
+      args=$dir
+      sendToServer
+      listenToServer
+      echo "$args"
+  else
+      echo "Path invalid"
+  fi
 }
 # ============================= Register Client ===============
 register(){
@@ -64,6 +81,7 @@ login(){
   # wait for response
   listenToServer
   echo "$args"
+  dataFetch
 }
 #======================== Program start ================
 while true
@@ -86,6 +104,7 @@ do
       ;;
    q)
       echo "quit"
+      exit
       ;;
    esac
 done
